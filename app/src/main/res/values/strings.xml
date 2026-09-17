@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Auto Click</string>
+
+    <string name="app_name">AutoClicker</string>
+
+    <string name="accessibility_description">
+        Auto Clicker cần quyền Accessibility để thực hiện thao tác chạm tự động.
+    </string>
+
 </resources>

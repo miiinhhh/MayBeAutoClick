@@ -1,65 +1,65 @@
-# Auto Clicker (AutoClick2) 🤖🖱️
+# Auto Clicker (AutoClick2) 🖱️
 
-An advanced, lightweight Android Auto Clicker application built with Java, leveraging Android's **Accessibility Service** and **Floating Window Overlay** APIs. It allows users to automate taps across any app or game without requiring root access.
-
----
-
-## ✨ Key Features
-
-- **Root-Free Operation**: Uses Android's native Accessibility Service `dispatchGesture` API to simulate real touch inputs safely and reliably.
-- **Floating Control Panel**: Sleek, draggable overlay control bar providing instant access to:
-  - ➕ **Add Point**: Add new numbered click points (`1, 2, 3...`).
-  - ➖ **Remove Point**: Remove the last click point.
-  - ⚙ **Settings**: Configure click timing and modes directly from the overlay.
-  - ▶ / ⏹ **Start / Stop**: Control clicking instantly over any app or game.
-- **Multi-Point Management**:
-  - Create and manage multiple click points.
-  - Drag and position each point independently anywhere on the screen.
-  - Circular target design with a red center dot for high-precision targeting.
-- **Advanced Customization (Settings)**:
-  - **Delay Between Clicks**: Configurable in milliseconds (ms) or seconds (s).
-  - **Click Duration (Hold Time)**: Adjust press/hold duration.
-  - **Click Modes**:
-    - *Multi Point*: Sequential execution (`A → B → C → A → B → C...`).
-    - *Single Point*: Continuous clicks on Point 1.
-    - *Random*: Randomly selects points from the configured list.
-  - **Repeat / Loop Count**: Choose between 1 time, 10 times, 100 times, or Infinite (`∞`).
-- **Clean Dashboard UI**: Modern dark-themed dashboard displaying real-time Accessibility status, active click points count, delay, and repeat settings.
+Ứng dụng Auto Clicker (Tự động click) tiên tiến dành cho Android được viết bằng ngôn ngữ Java, sử dụng **Dịch vụ Trợ năng (Accessibility Service)** và **Cửa sổ nổi (Floating Window Overlay)**. Ứng dụng cho phép bạn tự động hóa các thao tác chạm trên mọi ứng dụng hoặc trò chơi mà không cần root thiết bị.
 
 ---
 
-## 📱 System Requirements
+## ✨ Tính năng chính
 
-- **Android Version**: Android 7.0 (API 24) or higher.
-- **Permissions Required**:
-  - **Accessibility Service**: Required to simulate touch gestures on the screen.
-  - **Display over other apps (SYSTEM_ALERT_WINDOW)**: Required to show floating click points and the control panel overlay.
+- **Không cần Root**: Sử dụng API `dispatchGesture` gốc của Android Accessibility Service để mô phỏng thao tác chạm an toàn và chính xác.
+- **Bảng điều khiển nổi**: Thanh công cụ nổi trực quan, tiện lợi có thể kéo đi bất cứ đâu trên màn hình, hỗ trợ:
+  - ➕ **Thêm điểm**: Thêm các điểm click mới được đánh số (`1, 2, 3...`).
+  - ➖ **Xóa điểm**: Xóa điểm click gần nhất.
+  - ⚙ **Cài đặt**: Tỉnh chỉnh thời gian và chế độ ngay trên màn hình nổi.
+  - ▶ / ⏹ **Start / Stop**: Bật/tắt auto click tức thì trên mọi ứng dụng/game.
+- **Quản lý đa điểm click**:
+  - Tạo và quản lý nhiều điểm click cùng lúc.
+  - Kéo thả từng điểm đến bất kỳ vị trí mong muốn trên màn hình.
+  - Thiết kế vòng tròn mục tiêu với tâm màu đỏ giúp định vị chính xác tuyệt đối.
+- **Cài đặt nâng cao**:
+  - **Delay giữa các lần click**: Tùy chỉnh theo đơn vị mili-giây (ms) hoặc giây (s).
+  - **Thời gian giữ click (Duration)**: Điều chỉnh thời gian giữ mỗi nhịp chạm.
+  - **Chế độ click**:
+    - *Multi Point*: Click tuần tự vòng lặp (`A → B → C → A → B → C...`).
+    - *Single Point*: Click liên tục tại điểm số 1.
+    - *Random*: Chọn ngẫu nhiên các điểm trong danh sách.
+  - **Số lần lặp (Repeat)**: Lựa chọn 1 lần, 10 lần, 100 lần hoặc Vô hạn (`∞`).
+- **Giao diện trang chủ hiện đại**: Giao diện tối (Dark mode) trực quan, hiển thị trạng thái Trợ năng, số lượng điểm click, delay và lặp rõ ràng.
 
 ---
 
-## 🚀 How to Use
+## 📱 Yêu cầu hệ thống
 
-1. **Enable Accessibility**:
-   - Open the app and tap **Bật Accessibility**.
-   - Find **Auto Clicker** in your device's Accessibility settings and turn it **ON**.
-2. **Add Click Points**:
-   - Return to the app and tap **Add Point** (or use the floating panel `+` button).
-   - Drag the numbered circles (`1, 2, 3...`) to your target locations on the screen.
-3. **Configure Settings**:
-   - Tap **⚙ Settings** to customize delay, click duration, click mode, and loop count.
-4. **Start Auto Clicking**:
-   - Tap **▶ START** (either in the app or on the floating control panel) to begin automated clicking!
+- **Phiên bản Android**: Android 7.0 (API 24) trở lên.
+- **Quyền yêu cầu**:
+  - **Dịch vụ Trợ năng (Accessibility Service)**: Dùng để mô phỏng cử chỉ chạm trên màn hình.
+  - **Hiển thị trên ứng dụng khác (SYSTEM_ALERT_WINDOW)**: Dùng để hiển thị các điểm click nổi và bảng điều khiển.
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Hướng dẫn sử dụng
 
-- **Language**: Java
-- **UI Framework**: Android Views (XML & Programmatic Views), Material Design
+1. **Bật Trợ năng**:
+   - Mở ứng dụng và bấm **Bật Accessibility**.
+   - Tìm ứng dụng **Auto Clicker** trong phần Cài đặt Trợ năng của thiết bị và bật **Bật (ON)**.
+2. **Thêm điểm Click**:
+   - Quay lại ứng dụng và bấm **Add Point** (hoặc dùng nút `+` trên bảng nổi).
+   - Kéo các vòng tròn số (`1, 2, 3...`) đến vị trí bạn muốn click trên màn hình.
+3. **Cài đặt thông số**:
+   - Bấm nút **⚙ Settings** để chỉnh delay, thời gian giữ, chế độ click và số lần lặp.
+4. **Chạy Auto Click**:
+   - Bấm **▶ START** (trên app hoặc trên bảng điều khiển nổi) để bắt đầu tự động click!
+
+---
+
+## 🛠️ Công nghệ sử dụng
+
+- **Ngôn ngữ**: Java
+- **Giao diện**: Android Views (XML & Programmatic Views), Material Design
 - **Core APIs**: `AccessibilityService` (`dispatchGesture`), `WindowManager` (Floating Overlays)
 
 ---
 
-## 📄 License
+## 📄 Giấy phép
 
-This project is open-source and available for personal and educational use.
+Dự án mã nguồn mở phục vụ cho mục đích học tập và cá nhân.

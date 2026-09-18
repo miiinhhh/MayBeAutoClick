@@ -103,6 +103,7 @@ public class AutoClickService extends AccessibilityService {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+                if (isRunning) return false; // Do not drag while running
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         initialX = clickPointParams.x;
@@ -247,6 +248,13 @@ public class AutoClickService extends AccessibilityService {
         if (isRunning) return;
 
         isRunning = true;
+
+        // Make click point touch-through (FLAG_NOT_TOUCHABLE) so accessibility gesture clicks underlying apps
+        clickPointParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+        if (windowManager != null && clickPointView != null) {
+            windowManager.updateViewLayout(clickPointView, clickPointParams);
+        }
+
         if (btnStartStopControl != null) {
             btnStartStopControl.setText("Stop");
             btnStartStopControl.setBackgroundColor(0xFFF44336);
@@ -269,6 +277,13 @@ public class AutoClickService extends AccessibilityService {
 
     public void stopClicking() {
         isRunning = false;
+
+        // Restore touchable flag for click point so it can be dragged again
+        if (clickPointParams != null && windowManager != null && clickPointView != null) {
+            clickPointParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+            windowManager.updateViewLayout(clickPointView, clickPointParams);
+        }
+
         if (btnStartStopControl != null) {
             btnStartStopControl.setText("Start");
             btnStartStopControl.setBackgroundColor(0xFF4CAF50);

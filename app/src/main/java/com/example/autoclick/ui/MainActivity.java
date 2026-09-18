@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,35 +14,45 @@ import com.example.autoclick.service.AutoClickService;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvStatus;
-    private Button btnAccessibility;
-    private Button btnAddPoint;
-    private Button btnStartStop;
+    private TextView tvAccessibilityStatus;
+    private TextView tvClickPointsCount;
+    private TextView tvDelayInfo;
+    private TextView tvRepeatInfo;
+
+    private Button btnAccessibilityAction;
+    private Button btnAddPointAction;
+    private Button btnStartAction;
+    private TextView tvSettingsAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tvStatus = findViewById(R.id.tvStatus);
-        btnAccessibility = findViewById(R.id.btnAccessibility);
-        btnAddPoint = findViewById(R.id.btnAddPoint);
-        btnStartStop = findViewById(R.id.btnStartStop);
+        tvAccessibilityStatus = findViewById(R.id.tvAccessibilityStatus);
+        tvClickPointsCount = findViewById(R.id.tvClickPointsCount);
+        tvDelayInfo = findViewById(R.id.tvDelayInfo);
+        tvRepeatInfo = findViewById(R.id.tvRepeatInfo);
 
-        btnAccessibility.setOnClickListener(v -> {
+        btnAccessibilityAction = findViewById(R.id.btnAccessibilityAction);
+        btnAddPointAction = findViewById(R.id.btnAddPointAction);
+        btnStartAction = findViewById(R.id.btnStartAction);
+        tvSettingsAction = findViewById(R.id.tvSettingsAction);
+
+        btnAccessibilityAction.setOnClickListener(v -> {
             Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
             startActivity(intent);
         });
 
-        btnAddPoint.setOnClickListener(v -> {
+        btnAddPointAction.setOnClickListener(v -> {
             AutoClickService service = AutoClickService.getInstance();
             if (service == null) {
-                Toast.makeText(this, "Vui lòng bật dịch vụ Accessibility trước!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                startActivity(intent);
                 return;
             }
 
             if (!Settings.canDrawOverlays(this)) {
-                Toast.makeText(this, "Vui lòng cấp quyền hiển thị trên ứng dụng khác!", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                         Uri.parse("package:" + getPackageName()));
                 startActivity(intent);
@@ -51,40 +60,46 @@ public class MainActivity extends AppCompatActivity {
             }
 
             service.showOverlay();
-            Toast.makeText(this, "Đã hiển thị điểm click. Hãy kéo đến vị trí muốn click.", Toast.LENGTH_SHORT).show();
         });
 
-        btnStartStop.setOnClickListener(v -> {
+        btnStartAction.setOnClickListener(v -> {
             AutoClickService service = AutoClickService.getInstance();
             if (service == null) {
-                Toast.makeText(this, "Vui lòng bật dịch vụ Accessibility trước!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                startActivity(intent);
                 return;
             }
 
             service.toggleClicking();
-            updateStartStopButton();
+            updateUIState();
+        });
+
+        tvSettingsAction.setOnClickListener(v -> {
+            AutoClickService service = AutoClickService.getInstance();
+            if (service == null) {
+                Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                startActivity(intent);
+                return;
+            }
+
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivity(intent);
+                return;
+            }
+
+            service.showSettingsOverlay();
         });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkAccessibilityStatus();
-        updateStartStopButton();
+        updateUIState();
     }
 
-    private void updateStartStopButton() {
-        AutoClickService service = AutoClickService.getInstance();
-        if (service != null && service.isRunning()) {
-            btnStartStop.setText("Stop");
-            btnStartStop.setBackgroundColor(0xFFFF5722);
-        } else {
-            btnStartStop.setText("Start");
-            btnStartStop.setBackgroundColor(0xFF4CAF50);
-        }
-    }
-
-    private void checkAccessibilityStatus() {
+    private void updateUIState() {
         AutoClickService service = AutoClickService.getInstance();
         boolean isServiceRunning = (service != null);
 
@@ -100,11 +115,44 @@ public class MainActivity extends AppCompatActivity {
                 (enabledServices.contains(serviceName1) || enabledServices.contains(serviceName2));
 
         if (isServiceRunning || isEnabledInSettings) {
-            tvStatus.setText("Accessibility: ON");
-            btnAccessibility.setText("Accessibility đã bật");
+            tvAccessibilityStatus.setText("● ON");
+            tvAccessibilityStatus.setTextColor(0xFF4CAF50);
+            btnAccessibilityAction.setText("Accessibility đã bật");
         } else {
-            tvStatus.setText("Accessibility: OFF");
-            btnAccessibility.setText("Bật Accessibility");
+            tvAccessibilityStatus.setText("● OFF");
+            tvAccessibilityStatus.setTextColor(0xFFF44336);
+            btnAccessibilityAction.setText("Bật Accessibility");
+        }
+
+        if (service != null) {
+            tvClickPointsCount.setText(String.valueOf(service.getClickPointsCount()));
+            long delay = service.getDelayBetweenClicks();
+            if (delay >= 1000 && delay % 1000 == 0) {
+                tvDelayInfo.setText((delay / 1000) + " s");
+            } else {
+                tvDelayInfo.setText(delay + " ms");
+            }
+
+            int loop = service.getLoopCount();
+            if (loop == -1) {
+                tvRepeatInfo.setText("∞");
+            } else {
+                tvRepeatInfo.setText(loop + " lần");
+            }
+
+            if (service.isRunning()) {
+                btnStartAction.setText("⏹ STOP");
+                btnStartAction.setBackgroundColor(0xFFF44336);
+            } else {
+                btnStartAction.setText("▶ START");
+                btnStartAction.setBackgroundColor(0xFF4CAF50);
+            }
+        } else {
+            tvClickPointsCount.setText("0");
+            tvDelayInfo.setText("500 ms");
+            tvRepeatInfo.setText("∞");
+            btnStartAction.setText("▶ START");
+            btnStartAction.setBackgroundColor(0xFF4CAF50);
         }
     }
 }

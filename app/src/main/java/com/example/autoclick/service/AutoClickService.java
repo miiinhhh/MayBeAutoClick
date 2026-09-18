@@ -22,7 +22,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -99,6 +98,18 @@ public class AutoClickService extends AccessibilityService {
         return instance;
     }
 
+    public int getClickPointsCount() {
+        return clickPoints.size();
+    }
+
+    public long getDelayBetweenClicks() {
+        return delayBetweenClicks;
+    }
+
+    public int getLoopCount() {
+        return loopCount;
+    }
+
     private AppCompatButton createStyledButton(String text, int bgColor, float textSize) {
         AppCompatButton btn = new AppCompatButton(this) {
             @Override
@@ -158,10 +169,7 @@ public class AutoClickService extends AccessibilityService {
     }
 
     public void showSettingsOverlay() {
-        if (isRunning) {
-            Toast.makeText(this, "Vui lòng dừng Auto Click trước khi chỉnh cài đặt!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (isRunning) return;
         if (isShowingSettings) return;
 
         windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -304,10 +312,9 @@ public class AutoClickService extends AccessibilityService {
                 else if (checkedId == rb100.getId()) loopCount = 100;
                 else loopCount = -1;
 
-                Toast.makeText(this, "Đã lưu cài đặt!", Toast.LENGTH_SHORT).show();
                 hideSettingsOverlay();
             } catch (Exception e) {
-                Toast.makeText(this, "Vui lòng nhập số hợp lệ!", Toast.LENGTH_SHORT).show();
+                // Ignore invalid input
             }
         });
 
@@ -449,18 +456,13 @@ public class AutoClickService extends AccessibilityService {
             isShowingOverlay = true;
 
             addClickPoint();
-
-            Toast.makeText(this, "Đã bật bảng điều khiển quản lý điểm click", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void addClickPoint() {
-        if (isRunning) {
-            Toast.makeText(this, "Vui lòng dừng Auto Click trước khi thêm điểm!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (isRunning) return;
 
         int newId = clickPoints.size() + 1;
         int layoutParamType;
@@ -516,26 +518,18 @@ public class AutoClickService extends AccessibilityService {
         try {
             windowManager.addView(pointView, pointParams);
             clickPoints.add(new ClickPointInfo(newId, pointView, pointParams));
-            Toast.makeText(this, "Đã thêm điểm số " + newId, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void removeLastClickPoint() {
-        if (isRunning) {
-            Toast.makeText(this, "Vui lòng dừng Auto Click trước khi xóa điểm!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (clickPoints.isEmpty()) {
-            Toast.makeText(this, "Không còn điểm nào để xóa!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (isRunning) return;
+        if (clickPoints.isEmpty()) return;
 
         ClickPointInfo lastPoint = clickPoints.remove(clickPoints.size() - 1);
         try {
             windowManager.removeView(lastPoint.view);
-            Toast.makeText(this, "Đã xóa điểm số " + lastPoint.id, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -568,10 +562,7 @@ public class AutoClickService extends AccessibilityService {
     }
 
     public void startClicking() {
-        if (clickPoints.isEmpty()) {
-            Toast.makeText(this, "Vui lòng thêm ít nhất một điểm click!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (clickPoints.isEmpty()) return;
         if (isRunning) return;
 
         isRunning = true;
@@ -605,7 +596,6 @@ public class AutoClickService extends AccessibilityService {
                         currentLoopRemaining--;
                         if (currentLoopRemaining <= 0) {
                             stopClicking();
-                            Toast.makeText(AutoClickService.this, "Đã hoàn thành số lần lặp!", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
@@ -617,7 +607,6 @@ public class AutoClickService extends AccessibilityService {
                         currentLoopRemaining--;
                         if (currentLoopRemaining <= 0) {
                             stopClicking();
-                            Toast.makeText(AutoClickService.this, "Đã hoàn thành số lần lặp!", Toast.LENGTH_SHORT).show();
                             return;
                         }
                     }
@@ -629,7 +618,6 @@ public class AutoClickService extends AccessibilityService {
                             currentLoopRemaining--;
                             if (currentLoopRemaining <= 0) {
                                 stopClicking();
-                                Toast.makeText(AutoClickService.this, "Đã hoàn thành số lần lặp!", Toast.LENGTH_SHORT).show();
                                 return;
                             }
                         }
@@ -647,7 +635,6 @@ public class AutoClickService extends AccessibilityService {
             }
         };
         handler.post(clickRunnable);
-        Toast.makeText(this, "Bắt đầu Auto Click (" + clickPoints.size() + " điểm)", Toast.LENGTH_SHORT).show();
     }
 
     public void stopClicking() {
@@ -674,7 +661,6 @@ public class AutoClickService extends AccessibilityService {
             handler.removeCallbacks(clickRunnable);
             clickRunnable = null;
         }
-        Toast.makeText(this, "Đã dừng Auto Click", Toast.LENGTH_SHORT).show();
     }
 
     public boolean isRunning() {

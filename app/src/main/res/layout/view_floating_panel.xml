@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/panelRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@drawable/bg_floating_panel"
+    android:paddingStart="6dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp">
+
+    <!-- Drag Handle -->
+    <ImageView
+        android:id="@+id/ivDragHandle"
+        android:layout_width="20dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_drag_indicator"
+        android:contentDescription="Drag Handle"
+        app:tint="@color/text_muted" />
+
+    <!-- Add Point Button -->
+    <ImageButton
+        android:id="@+id/btnOverlayAdd"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/bg_circle_button"
+        android:src="@drawable/ic_add"
+        android:contentDescription="Add Point"
+        app:tint="@color/primary" />
+
+    <!-- Remove Point Button -->
+    <ImageButton
+        android:id="@+id/btnOverlayRemove"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/bg_circle_button"
+        android:src="@drawable/ic_remove"
+        android:contentDescription="Remove Point"
+        app:tint="@color/status_warning" />
+
+    <!-- Settings Button -->
+    <ImageButton
+        android:id="@+id/btnOverlaySettings"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="6dp"
+        android:background="@drawable/bg_circle_button"
+        android:src="@drawable/ic_settings"
+        android:contentDescription="Settings"
+        app:tint="@color/accent_cyan" />
+
+    <!-- Start / Stop Button -->
+    <ImageButton
+        android:id="@+id/btnOverlayStartStop"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_circle_button_start"
+        android:src="@drawable/ic_play"
+        android:contentDescription="Start/Stop"
+        app:tint="@color/white" />
+
+    <!-- Close Button -->
+    <ImageButton
+        android:id="@+id/btnOverlayClose"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/bg_circle_button"
+        android:src="@drawable/ic_close"
+        android:contentDescription="Close"
+        app:tint="@color/status_inactive" />
+
+</LinearLayout>

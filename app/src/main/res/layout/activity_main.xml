@@ -1,188 +1,349 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="24dp"
-    android:background="#121212">
+    android:background="@color/bg_dark"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
-    <!-- Title -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AUTO CLICKER"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:layout_marginTop="20dp"
-        android:letterSpacing="0.1" />
-
-    <!-- Info Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#1E1E1E"
-        android:padding="20dp"
-        android:layout_marginTop="30dp">
+        android:padding="20dp">
 
-        <!-- Accessibility Row -->
+        <!-- App Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingBottom="12dp">
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp">
 
-            <TextView
+            <FrameLayout
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/bg_input_field">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_touch_app"
+                    android:contentDescription="Logo"
+                    app:tint="@color/primary" />
+            </FrameLayout>
+
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Accessibility"
-                android:textColor="#CCCCCC"
-                android:textSize="16sp" />
+                android:layout_marginStart="14dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvAccessibilityStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="● OFF"
-                android:textColor="#F44336"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AUTO CLICKER"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.04" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Tự động hóa thao tác chạm thông minh"
+                    android:textColor="@color/text_muted"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Divider -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#333333"
-            android:layout_marginVertical="8dp" />
-
-        <!-- Click points Row -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingVertical="10dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Click points"
-                android:textColor="#CCCCCC"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/tvClickPointsCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Delay Row -->
-        <LinearLayout
+        <!-- Status & Permissions Card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.AutoClick.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingVertical="10dp">
+            android:layout_marginBottom="16dp">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Delay"
-                android:textColor="#CCCCCC"
-                android:textSize="16sp" />
+                android:orientation="vertical"
+                android:padding="18dp">
 
-            <TextView
-                android:id="@+id/tvDelayInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="500 ms"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QUYỀN TRUY CẬP HỆ THỐNG"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08" />
 
-        <!-- Repeat Row -->
-        <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="14dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_accessibility"
+                        android:contentDescription="Accessibility"
+                        app:tint="@color/primary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:text="Accessibility Service"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <!-- Accessibility Status Badge -->
+                    <TextView
+                        android:id="@+id/tvAccessibilityStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_badge_inactive"
+                        android:text="● OFF"
+                        android:textColor="@color/status_inactive"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAccessibilityAction"
+                    style="@style/Widget.AutoClick.Button.Outlined"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Bật Accessibility"
+                    app:icon="@drawable/ic_accessibility"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/primary" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Metrics & Info Card -->
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.AutoClick.Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingVertical="10dp">
+            android:layout_marginBottom="24dp">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Repeat"
-                android:textColor="#CCCCCC"
-                android:textSize="16sp" />
+                android:orientation="vertical"
+                android:padding="18dp">
 
-            <TextView
-                android:id="@+id/tvRepeatInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="∞"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="THÔNG SỐ CẤU HÌNH HIỆN TẠI"
+                    android:textColor="@color/text_muted"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08" />
+
+                <!-- 3 Metrics Grid -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <!-- Metric 1: Click Points -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/bg_input_field"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_touch_app"
+                            android:contentDescription="Points"
+                            app:tint="@color/primary" />
+
+                        <TextView
+                            android:id="@+id/tvClickPointsCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="0"
+                            android:textColor="@color/text_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Điểm chạm"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <!-- Space -->
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="1dp" />
+
+                    <!-- Metric 2: Delay -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/bg_input_field"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_timer"
+                            android:contentDescription="Delay"
+                            app:tint="@color/accent_cyan" />
+
+                        <TextView
+                            android:id="@+id/tvDelayInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="500 ms"
+                            android:textColor="@color/text_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Độ trễ"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <!-- Space -->
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="1dp" />
+
+                    <!-- Metric 3: Repeat -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:background="@drawable/bg_input_field"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_repeat"
+                            android:contentDescription="Repeat"
+                            app:tint="@color/accent_purple" />
+
+                        <TextView
+                            android:id="@+id/tvRepeatInfo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="∞"
+                            android:textColor="@color/text_primary"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Lặp lại"
+                            android:textColor="@color/text_muted"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Actions Section Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THAO TÁC ĐIỀU KHIỂN"
+            android:textColor="@color/text_muted"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.08"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Add Point Action Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddPointAction"
+            style="@style/Widget.AutoClick.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mở Thanh Điều Khiển Nổi"
+            app:icon="@drawable/ic_layers"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+        <!-- Start / Stop Hero Action Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStartAction"
+            style="@style/Widget.AutoClick.Button.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:backgroundTint="@color/status_active"
+            android:text="▶ START"
+            android:textSize="17sp"
+            app:icon="@drawable/ic_play"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+        <!-- Settings Action Button (Preserves tvSettingsAction ID & functionality) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tvSettingsAction"
+            style="@style/Widget.AutoClick.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="⚙ Cài Đặt Nâng Cao"
+            app:icon="@drawable/ic_settings"
+            app:iconGravity="textStart"
+            app:iconTint="@color/accent_cyan" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="AutoClick2 • Bản nâng cấp giao diện Material 3"
+            android:textColor="@color/text_muted"
+            android:textSize="11sp" />
 
     </LinearLayout>
-
-    <!-- Buttons -->
-    <Button
-        android:id="@+id/btnAccessibilityAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Bật Accessibility"
-        android:backgroundTint="#2196F3"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/btnAddPointAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Add Point"
-        android:backgroundTint="#3F51B5"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp" />
-
-    <Button
-        android:id="@+id/btnStartAction"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="▶ START"
-        android:backgroundTint="#4CAF50"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvSettingsAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="⚙ Settings"
-        android:textColor="#00BCD4"
-        android:textSize="16sp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="8dp" />
-
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

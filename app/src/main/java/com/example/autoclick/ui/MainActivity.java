@@ -116,11 +116,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (isServiceRunning || isEnabledInSettings) {
             tvAccessibilityStatus.setText("● ON");
-            tvAccessibilityStatus.setTextColor(0xFF4CAF50);
+            tvAccessibilityStatus.setTextColor(0xFF10B981);
+            tvAccessibilityStatus.setBackgroundResource(R.drawable.bg_badge_active);
             btnAccessibilityAction.setText("Accessibility đã bật");
         } else {
             tvAccessibilityStatus.setText("● OFF");
-            tvAccessibilityStatus.setTextColor(0xFFF44336);
+            tvAccessibilityStatus.setTextColor(0xFFEF4444);
+            tvAccessibilityStatus.setBackgroundResource(R.drawable.bg_badge_inactive);
             btnAccessibilityAction.setText("Bật Accessibility");
         }
 
@@ -142,17 +144,17 @@ public class MainActivity extends AppCompatActivity {
 
             if (service.isRunning()) {
                 btnStartAction.setText("⏹ STOP");
-                btnStartAction.setBackgroundColor(0xFFF44336);
+                btnStartAction.setBackgroundColor(0xFFEF4444);
             } else {
                 btnStartAction.setText("▶ START");
-                btnStartAction.setBackgroundColor(0xFF4CAF50);
+                btnStartAction.setBackgroundColor(0xFF10B981);
             }
         } else {
             tvClickPointsCount.setText("0");
             tvDelayInfo.setText("500 ms");
             tvRepeatInfo.setText("∞");
             btnStartAction.setText("▶ START");
-            btnStartAction.setBackgroundColor(0xFF4CAF50);
+            btnStartAction.setBackgroundColor(0xFF10B981);
         }
     }
 }

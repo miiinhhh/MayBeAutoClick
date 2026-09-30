@@ -6,8 +6,8 @@
 
     <!-- Center Aim Dot -->
     <View
-        android:layout_width="8dp"
-        android:layout_height="8dp"
+        android:layout_width="6dp"
+        android:layout_height="6dp"
         android:layout_gravity="center"
         android:background="@drawable/bg_target_center" />
 
